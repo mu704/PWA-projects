@@ -81,7 +81,7 @@ async function staleWhileRevalidate(ev) {
     if (fetchResponse.ok) {
       const cache = await caches.open(cacheName);
       await cache.put(ev.request, fetchResponse.clone());
-      return fetchResponse;
+      return cacheResponse || fetchResponse;
     } else {
       return cacheResponse || fetchResponse;
     }
